@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react'
 import Categories from './components/Categories'
-import User from './components/User'
+import UserDetails from './components/UserDetails'
 import categoriesService from './services/categories'
 import Notification from './components/Notification'
-import LoginForm from './components/Loginform'
+import LoginForm from './components/LoginForm'
 import Togglable from './components/Togglable'
 import { setCurrentUserAction, logoutAction } from './reducers/currentUserReducer'
 import { initUsersAction } from './reducers/userReducer'
@@ -53,7 +53,7 @@ const Menu = () => {
       <Switch>
 
         <Route path="/users/:id">
-          <User user={user} />
+          <UserDetails user={user} />
         </Route>
 
         <Route path="/users">

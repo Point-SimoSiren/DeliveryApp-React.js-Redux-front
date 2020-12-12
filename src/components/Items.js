@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react'
-import Blog from './Blog'
+/*import React, { useEffect } from 'react'
+import Blog from './Item'
 import { notificationAction, emptyAction } from '../reducers/notificationReducer'
 import { positiveAction, negativeAction } from '../reducers/positivityReducer'
 import { initBlogsAction, removeAction } from '../reducers/categoryReducer'
@@ -8,7 +8,7 @@ import blogsService from '../services/categories'
 import Togglable from './Togglable'
 import BlogForm from './BlogForm'
 
-const Blogs = () => {
+const Items = () => {
 
     const dispatch = useDispatch()
 
@@ -65,4 +65,5 @@ const Blogs = () => {
             }
         </>)
 }
-export default Blogs
+export default Items
+*/

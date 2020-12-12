@@ -1,10 +1,11 @@
+/*
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { likeAction } from '../reducers/categoryReducer'
 import { positiveAction } from '../reducers/positivityReducer'
 import { notificationAction, emptyAction } from '../reducers/notificationReducer'
 
-const Blog = ({ blog, handleDeleteClick }) => {
+const Item = ({ item, handleDeleteClick }) => {
     const [showBlog, setShowBlog] = useState(false)
 
     const dispatch = useDispatch()
@@ -56,4 +57,5 @@ const Blog = ({ blog, handleDeleteClick }) => {
         )
     }
 }
-export default Blog
+export default Item
+*/

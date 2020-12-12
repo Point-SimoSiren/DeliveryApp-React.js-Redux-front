@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { useDispatch } from 'react-redux'
 import loginService from '../services/login'
-import blogsService from '../services/categories'
+import categoriesService from '../services/categories'
 import { notificationAction, emptyAction } from '../reducers/notificationReducer'
 import { positiveAction, negativeAction } from '../reducers/positivityReducer'
 import { setCurrentUserAction } from '../reducers/currentUserReducer'
@@ -26,10 +26,10 @@ const LoginForm = () => {
                 username, password,
             })
             window.localStorage.setItem(
-                'loggedBlogsAppUser', JSON.stringify(currentUser)
+                'loggedAppUser', JSON.stringify(currentUser)
             )
 
-            blogsService.setToken(currentUser.token)
+            categoriesService.setToken(currentUser.token)
             dispatch(setCurrentUserAction(currentUser))
             setUsername('')
             setPassword('')
@@ -39,7 +39,6 @@ const LoginForm = () => {
                 dispatch(emptyAction())
             }, 3000)
 
-
         } catch (exception) {
             dispatch(negativeAction())
             dispatch(notificationAction('Wrong credentials!'))
@@ -48,7 +47,6 @@ const LoginForm = () => {
             }, 3000)
         }
     }
-
 
     return (
         <div>
@@ -71,7 +69,6 @@ const LoginForm = () => {
                     />
                 </div>
                 <Button type="submit">login</Button>
-
             </form>
         </div>
     )
