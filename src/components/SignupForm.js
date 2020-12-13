@@ -56,21 +56,34 @@ const SignupForm = () => {
     const [newEmail, setNewEmail] = useState('')
 
     return (
-        <form onSubmit={addBlog}>
+        <form onSubmit={addUser}>
             <div>
-                title: <input type="text" value={newTitle} name="Title"
+                username: <input type="text" value={newUsername} name="Username"
                     onChange={({ target }) => setNewTitle(target.value)} />
             </div>
             <div>
-                author: <input type="text" value={newAuthor} name="Author"
-                    onChange={({ target }) => setNewAuthor(target.value)} />
+                password: <input type="password" value={newPassword} name="Password"
+                    onChange={({ target }) => setNewPassword(target.value)} />
             </div>
             <div>
-                url: <input type="link" value={newUrl} name="URL"
-                    onChange={({ target }) => setNewUrl(target.value)} />
+                name: <input type="text" value={newName} name="Name"
+                    onChange={({ target }) => setNewName(target.value)} />
             </div>
             <div>
-                <Button type="submit">add</Button>
+                address: <input type="text" value={newAddress} name="Address"
+                    onChange={({ target }) => setNewAddress(target.value)} />
+            </div>
+            <div>
+                phone: <input type="text" value={newPhone} name="Phone"
+                    onChange={({ target }) => setNewPhone(target.value)} />
+            </div>
+            <div>
+                email: <input type="email" value={newEmail} name="Email"
+                    onChange={({ target }) => setNewEmail(target.value)} />
+            </div>
+
+            <div>
+                <Button type="submit">create account</Button>
             </div>
         </form>
     )
