@@ -59,7 +59,7 @@ const SignupForm = () => {
         <form onSubmit={addUser}>
             <div>
                 username: <input type="text" value={newUsername} name="Username"
-                    onChange={({ target }) => setNewTitle(target.value)} />
+                    onChange={({ target }) => setNewUsername(target.value)} />
             </div>
             <div>
                 password: <input type="password" value={newPassword} name="Password"

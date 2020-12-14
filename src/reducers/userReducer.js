@@ -27,7 +27,7 @@ export const initUsersAction = () => {
 
 export const createAction = submitted => {
     return async dispatch => {
-        const newUser = await userService.create(submitted)
+        const newUser = await usersService.create(submitted)
         dispatch({
             type: 'CREATE',
             payload: newUser

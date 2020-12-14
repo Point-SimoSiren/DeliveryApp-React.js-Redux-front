@@ -1,10 +1,24 @@
-import React from 'react'
-import { useSelector } from 'react-redux'
+import React, { useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { initUsersAction } from '../reducers/userReducer'
+import usersService from '../services/users'
 import {
     Link
 } from "react-router-dom"
 
 const Users = () => {
+
+    const dispatch = useDispatch()
+
+    const currentUser = useSelector(({ currentUser }) => {
+        return currentUser
+    })
+
+    useEffect(() => {
+        console.log(currentUser.token)
+        usersService.setToken(currentUser.token)
+        dispatch(initUsersAction())
+    }, [dispatch])
 
     const users = useSelector(({ users }) => {
         return users

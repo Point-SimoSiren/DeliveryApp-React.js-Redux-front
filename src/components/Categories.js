@@ -1,40 +1,38 @@
 import React, { useEffect } from 'react'
-import Blog from './Item'
 import { notificationAction, emptyAction } from '../reducers/notificationReducer'
 import { positiveAction, negativeAction } from '../reducers/positivityReducer'
-import { initBlogsAction, removeAction } from '../reducers/categoryReducer'
+import { initCategoriesAction, removeAction } from '../reducers/categoryReducer'
 import { useDispatch, useSelector } from 'react-redux'
-import blogsService from '../services/categories'
+import categoriesService from '../services/categories'
 import Togglable from './Togglable'
-import BlogForm from './CategoryForm'
+import CategoryForm from './CategoryForm'
 
-const Blogs = () => {
+const Categories = () => {
 
     const dispatch = useDispatch()
 
     useEffect(() => {
-        dispatch(initBlogsAction())
+        dispatch(initCategoriesAction())
     }, [dispatch])
 
-    const blogs = useSelector(({ blogs }) => {
-        return blogs
+    const categories = useSelector(({ categories }) => {
+        return categories
     })
 
-
     const handleDeleteClick = id => {
-        const blogToRemove = blogs.find(blog => blog.id === id)
-        console.log(blogToRemove.id, blogToRemove.title)
-        if (window.confirm(`Removing ${blogToRemove.title}. Are you sure? `)) {
-            blogsService
+        const categoryToRemove = categories.find(c => c.id === id)
+
+        if (window.confirm(`Removing ${categoryToRemove.name}. Are you sure? `)) {
+            categoriesService
                 .remove(id)
                 .then(promise => {
-                    dispatch(removeAction(blogs.filter(filtered => filtered.id !== id)))
+                    dispatch(removeAction(categories.filter(filtered => filtered.id !== id)))
                     if (promise.status === 204) {
                         dispatch(positiveAction())
-                        dispatch(notificationAction(`${blogToRemove.title} was deleted from the database.`))
+                        dispatch(notificationAction(`${categoryToRemove.title} was deleted from the database.`))
                         setTimeout(() => {
                             dispatch(emptyAction())
-                            dispatch(initBlogsAction())
+                            dispatch(initCategoriesAction())
                         }, 3000)
                     }
                 })
@@ -42,7 +40,7 @@ const Blogs = () => {
                     dispatch(negativeAction())
                     console.log('Palvelimen palauttama error: ', error.response.data)
                     dispatch(notificationAction(
-                        ` ${error.response.data} OR ${blogToRemove.title} may not have been deleted due unexpected error. Pls. check.`
+                        ` ${error.response.data} OR ${categoryToRemove.name} may not have been deleted due unexpected error. Pls. check.`
                     ))
                     setTimeout(() => {
                         dispatch(emptyAction)
@@ -54,15 +52,25 @@ const Blogs = () => {
 
     return (
         <>
-            <Togglable buttonLabel='Add new blog'>
-                <BlogForm />
-            </Togglable>
-            {
-                blogs.map(blog =>
-                    <Blog key={blog.id} blog={blog}
-                        handleDeleteClick={handleDeleteClick} />
-                )
-            }
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th><th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {
+                        categories.map(c =>
+                            <tr key={c.id}>
+                                <td>{c.name}</td>
+                                <td>{c.description}</td>
+                                <button style={{ height: '30px', width: '70px' }}
+                                    onClick={() => handleDeleteClick(c.id)}>Delete</button>
+                            </tr>
+                        )
+                    }
+                </tbody>
+            </table>
         </>)
 }
-export default Blogs
+export default Categories
