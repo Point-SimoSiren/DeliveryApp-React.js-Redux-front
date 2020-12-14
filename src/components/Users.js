@@ -1,12 +1,12 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { initUsersAction } from '../reducers/userReducer'
 import usersService from '../services/users'
-import {
-    Link
-} from "react-router-dom"
+import UserDetails from './UserDetails'
 
 const Users = () => {
+
+    const [showDetailsId, setShowDetailsId] = useState(0)
 
     const dispatch = useDispatch()
 
@@ -26,26 +26,18 @@ const Users = () => {
 
     return (
         <>
-            <h2>Users</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Name</th><th>Username</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {
-                        users.map(user =>
-                            <tr key={user.id}>
-                                <Link to={`/users/${user.id}`}>
-                                    <td>{user.name}</td>
-                                    <td>{user.username}</td>
-                                </Link>
-                            </tr>
-                        )
-                    }
-                </tbody>
-            </table>
+            <h2>Click user to see details</h2>
+            {
+                users.map(user =>
+                    <div key="user.id">
+                        {showDetailsId === user.id && <button onClick={() => setShowDetailsId(0)}>Hide details</button>}
+                        <h4 onClick={() => setShowDetailsId(user.id)}>
+                            {showDetailsId !== user.id && user.name}
+                            {showDetailsId === user.id && <UserDetails user={user} setShowDetailsId={setShowDetailsId} />}
+                        </h4>
+                    </div>
+                )
+            }
         </>
     )
 }
