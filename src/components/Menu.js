@@ -9,7 +9,8 @@ import {
     Route,
     Link
 } from "react-router-dom"
-import { AppBar, Toolbar, Typography } from '@material-ui/core'
+import { AppBar, Toolbar, Button } from '@material-ui/core'
+import SignupForm from './SignupForm'
 
 
 const Menu = () => {
@@ -25,29 +26,49 @@ const Menu = () => {
 
     return (
         <div>
-            <AppBar position="static" color='orange'>
+
+            <AppBar style={{ backgroundColor: "orange" }}>
                 <Toolbar>
-                    <Typography variant="h4"><Link to="/categories">Categories</Link>
-                    </Typography>
+                    <Button>
+                        <Link to="/">Home</Link>
+                    </Button>
+                    <Button>
+                        <Link to="/categories">Categories</Link>
+                    </Button>
 
-                    <Typography variant="h4"><Link to="/items">Products</Link>
-                    </Typography>
+                    <Button>
+                        <Link to="/items">Products</Link>
+                    </Button>
+
+                    {!currentUser &&
+                        <Button>
+                            <Link to="/signup">Sign Up to place orders!</Link>
+                        </Button>
+                    }
+
+
 
                     {currentUser &&
-                        <Typography variant="h4"><Link to="/my-orders">My-orders</Link>
-                        </Typography>}
+                        <Button>
+                            <Link to="/my-orders">My-orders</Link>
+                        </Button>
+                    }
 
                     {currentUser &&
-                        <Typography variant="h4"><Link to="/cart">Cart</Link>
-                        </Typography>}
+                        <Link to="/cart">Cart</Link>
+                    }
 
                     {currentUser && currentUser.admin === true &&
-                        <Typography variant="h4"><Link to="/users">User Management</Link>
-                        </Typography>}
+                        <Link to="/users">User Management</Link>
+                    }
                 </Toolbar>
             </AppBar>
 
+
             <Switch>
+                <Route path="/signup">
+                    <SignupForm />
+                </Route>
                 <Route path="/categories">
                     <Categories categories={categories} />
                 </Route>

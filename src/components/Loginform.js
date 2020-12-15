@@ -10,6 +10,7 @@ import {
     Button,
     Input
 } from '@material-ui/core'
+import Textbox from './StyledComponents/Textbox'
 
 
 const LoginForm = () => {
@@ -54,16 +55,14 @@ const LoginForm = () => {
 
             <form onSubmit={handleLoginSubmit}>
                 <div>
-                    username
-                    <Input
+                    <Textbox mtop={20} width={300} placeholder="User Name"
                         value={username} autoComplete={username}
                         onChange={({ target }) => setUsername(target.value)}
                     />
                 </div>
                 <div>
-                    password
-                        <Input
-                        type="password"
+                    <Textbox mtop={20} width={300}
+                        type="password" placeholder="Password"
                         value={password} autoComplete={password}
                         onChange={({ target }) => setPassword(target.value)}
                     />

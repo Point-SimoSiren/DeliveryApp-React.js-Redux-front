@@ -51,17 +51,15 @@ const App = () => {
     return (
       <div>
         <Container>
+
           <h1>Delivery service</h1>
+          <Notification />
           <Togglable buttonLabel='login'>
             <LoginForm />
           </Togglable>
-          <Togglable buttonLabel='signup'>
-            <SignupForm />
-          </Togglable>
-
           <Menu />
-          <Notification />
         </Container>
+
       </div>
     )
   }
@@ -70,14 +68,15 @@ const App = () => {
     return (
       <Container>
         <h1>Delivery service</h1>
+        <Notification />
 
         <p>Welcome {currentUser.name}
           <Button style={{ width: "150px", height: "30px", marginLeft: "300px" }}
             onClick={handleLogOut} >
             LOGOUT
           </Button></p>
+
         <Menu />
-        <Notification />
       </Container>
     )
   }
