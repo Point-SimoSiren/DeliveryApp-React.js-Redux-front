@@ -2,16 +2,18 @@ import React, { useEffect } from 'react'
 import categoriesService from './services/categories'
 import Notification from './components/Notification'
 import Menu from './components/Menu'
-import LoginForm from './components/LoginForm'
-import SignupForm from './components/SignupForm'
-import Togglable from './components/Togglable'
 import { setCurrentUserAction, logoutAction } from './reducers/currentUserReducer'
 import { notificationAction, emptyAction } from './reducers/notificationReducer'
 import { positiveAction } from './reducers/positivityReducer'
 import { useDispatch, useSelector } from 'react-redux'
-import './index.css'
-import { Container, Button } from '@material-ui/core'
+import { Button, Grid } from '@material-ui/core'
+import styled from 'styled-components'
 
+const Container = styled(Grid)`
+    && {
+        padding: 10px;
+    }
+`;
 
 const App = () => {
 
@@ -54,9 +56,6 @@ const App = () => {
 
           <h1>Delivery service</h1>
           <Notification />
-          <Togglable buttonLabel='login'>
-            <LoginForm />
-          </Togglable>
           <Menu />
         </Container>
 

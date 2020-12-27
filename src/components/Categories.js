@@ -4,8 +4,6 @@ import { positiveAction, negativeAction } from '../reducers/positivityReducer'
 import { initCategoriesAction, removeAction } from '../reducers/categoryReducer'
 import { useDispatch, useSelector } from 'react-redux'
 import categoriesService from '../services/categories'
-import Togglable from './Togglable'
-import CategoryForm from './CategoryForm'
 
 const Categories = () => {
 
