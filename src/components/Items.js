@@ -1,40 +1,36 @@
-/*import React, { useEffect } from 'react'
-import Blog from './Item'
+import React, { useEffect } from 'react'
 import { notificationAction, emptyAction } from '../reducers/notificationReducer'
 import { positiveAction, negativeAction } from '../reducers/positivityReducer'
-import { initBlogsAction, removeAction } from '../reducers/categoryReducer'
+import { initItemsAction, removeAction } from '../reducers/itemReducer'
 import { useDispatch, useSelector } from 'react-redux'
-import blogsService from '../services/categories'
-import Togglable from './Togglable'
-import BlogForm from './BlogForm'
+import itemService from '../services/items'
 
 const Items = () => {
 
     const dispatch = useDispatch()
 
     useEffect(() => {
-        dispatch(initBlogsAction())
+        dispatch(initItemsAction())
     }, [dispatch])
 
-    const blogs = useSelector(({ blogs }) => {
-        return blogs
+    const items = useSelector(({ items }) => {
+        return items
     })
 
-
     const handleDeleteClick = id => {
-        const blogToRemove = blogs.find(blog => blog.id === id)
-        console.log(blogToRemove.id, blogToRemove.title)
-        if (window.confirm(`Removing ${blogToRemove.title}. Are you sure? `)) {
-            blogsService
+        const itemToRemove = items.find(i => i.id === id)
+
+        if (window.confirm(`Removing ${itemToRemove.name}. Are you sure? `)) {
+            itemService
                 .remove(id)
                 .then(promise => {
-                    dispatch(removeAction(blogs.filter(filtered => filtered.id !== id)))
+                    dispatch(removeAction(items.filter(filtered => filtered.id !== id)))
                     if (promise.status === 204) {
                         dispatch(positiveAction())
-                        dispatch(notificationAction(`${blogToRemove.title} was deleted from the database.`))
+                        dispatch(notificationAction(`${itemToRemove.name} was deleted from the database.`))
                         setTimeout(() => {
                             dispatch(emptyAction())
-                            dispatch(initBlogsAction())
+                            dispatch(initItemsAction())
                         }, 3000)
                     }
                 })
@@ -42,7 +38,7 @@ const Items = () => {
                     dispatch(negativeAction())
                     console.log('Palvelimen palauttama error: ', error.response.data)
                     dispatch(notificationAction(
-                        ` ${error.response.data} OR ${blogToRemove.title} may not have been deleted due unexpected error. Pls. check.`
+                        ` ${error.response.data} OR ${itemToRemove.name} may not have been deleted due unexpected error. Pls. check.`
                     ))
                     setTimeout(() => {
                         dispatch(emptyAction)
@@ -51,19 +47,38 @@ const Items = () => {
         }
     }
 
+    if (!items) {
+        return (<h3>Loading items...</h3>)
+    }
+    else {
+        return (
+            <>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th><th>Package</th><th>Price</th>
+                            <th>Manufacturer</th><th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {
+                            items.map(i =>
+                                <tr key={i.id}>
+                                    <td>{i.name}</td>
+                                    <td>{i.package}</td>
+                                    <td>{i.price}</td>
+                                    <td>{i.manufacturer}</td>
+                                    <td>{i.description}</td>
+                                    <button style={{ height: '30px', width: '70px' }}
+                                        onClick={() => handleDeleteClick(i.id)}>Delete</button>
+                                </tr>
+                            )
+                        }
+                    </tbody>
+                </table>
+            </>
+        )
+    }
 
-    return (
-        <>
-            <Togglable buttonLabel='Add new blog'>
-                <BlogForm />
-            </Togglable>
-            {
-                blogs.map(blog =>
-                    <Blog key={blog.id} blog={blog}
-                        handleDeleteClick={handleDeleteClick} />
-                )
-            }
-        </>)
 }
 export default Items
-*/

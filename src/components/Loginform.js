@@ -7,6 +7,9 @@ import { notificationAction, emptyAction } from '../reducers/notificationReducer
 import { positiveAction, negativeAction } from '../reducers/positivityReducer'
 import { setCurrentUserAction } from '../reducers/currentUserReducer'
 import {
+    Link
+} from "react-router-dom"
+import {
     Button,
     Input
 } from '@material-ui/core'
@@ -68,6 +71,9 @@ const LoginForm = () => {
                     />
                 </div>
                 <Button type="submit">login</Button>
+                <Button>
+                    <Link to="/">cancel</Link>
+                </Button>
             </form>
         </div>
     )

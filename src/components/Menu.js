@@ -121,6 +121,10 @@ const Menu = () => {
         return categories
     })
 
+    const items = useSelector(({ items }) => {
+        return items
+    })
+
     const currentUser = useSelector(({ currentUser }) => {
         return currentUser
     })
@@ -176,8 +180,8 @@ const Menu = () => {
                 <Route path="/categories">
                     <Categories categories={categories} />
                 </Route>
-                <Route path="/items">
-                    <Categories categories={categories} />
+                <Route path="/products">
+                    <Items items={items} />
                 </Route>
                 <Route path="/orders">
                     <Categories categories={categories} />

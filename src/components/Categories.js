@@ -3,7 +3,7 @@ import { notificationAction, emptyAction } from '../reducers/notificationReducer
 import { positiveAction, negativeAction } from '../reducers/positivityReducer'
 import { initCategoriesAction, removeAction } from '../reducers/categoryReducer'
 import { useDispatch, useSelector } from 'react-redux'
-import categoriesService from '../services/categories'
+import categoryService from '../services/categories'
 
 const Categories = () => {
 
@@ -21,7 +21,7 @@ const Categories = () => {
         const categoryToRemove = categories.find(c => c.id === id)
 
         if (window.confirm(`Removing ${categoryToRemove.name}. Are you sure? `)) {
-            categoriesService
+            categoryService
                 .remove(id)
                 .then(promise => {
                     dispatch(removeAction(categories.filter(filtered => filtered.id !== id)))

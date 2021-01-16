@@ -1,6 +1,6 @@
-import categoryService from '../services/categories'
+import itemService from '../services/items'
 
-const categoryReducer = (state = [], action) => {
+const itemReducer = (state = [], action) => {
     let newState = [...state]
     switch (action.type) {
 
@@ -16,11 +16,12 @@ const categoryReducer = (state = [], action) => {
 
         /*case 'UPDATE':
             const id = action.payload.id
-            const found = newState.findIndex((category) => {
-                return category.id === id
+            const found = newState.findIndex((item) => {
+                return item.id === id
             })
             newState[found].likes = newState[found].likes + 1
-            return newState*/
+            return newState
+            */
     }
 }
 
@@ -28,10 +29,10 @@ const categoryReducer = (state = [], action) => {
 
 export const createAction = submitted => {
     return async dispatch => {
-        const newCategory = await categoryService.create(submitted)
+        const newItem = await itemService.create(submitted)
         dispatch({
             type: 'CREATE',
-            payload: newCategory
+            payload: newItem
         })
     }
 }
@@ -47,28 +48,29 @@ export const removeAction = (id) => {
     }
 }
 
-export const initCategoriesAction = () => {
+export const initItemsAction = () => {
     return async dispatch => {
-        const categories = await categoryService.getAll()
+        const items = await itemService.getAll()
         dispatch({
             type: 'INITIALS',
-            payload: categories
+            payload: items
         })
     }
 }
+
 /*
-export const likeAction = (category) => {
+export const likeAction = (item) => {
     return dispatch => {
-        categoryService.update(category.id, category)
+        itemService.update(item.id, item)
         dispatch({
             type: 'UPDATE',
             payload: {
-                id: category.id,
-                category: category
+                id: item.id,
+                item: item
             }
         })
     }
 }
 */
 
-export default categoryReducer
+export default itemReducer
