@@ -17,6 +17,10 @@ const Categories = () => {
         return categories
     })
 
+    const currentUser = useSelector(({ currentUser }) => {
+        return currentUser
+    })
+
     const handleDeleteClick = id => {
         const categoryToRemove = categories.find(c => c.id === id)
 
@@ -62,8 +66,10 @@ const Categories = () => {
                             <tr key={c.id}>
                                 <td>{c.name}</td>
                                 <td>{c.description}</td>
-                                <button style={{ height: '30px', width: '70px' }}
-                                    onClick={() => handleDeleteClick(c.id)}>Delete</button>
+                                {currentUser && currentUser.admin === true &&
+                                    <button style={{ height: '30px', width: '70px' }}
+                                        onClick={() => handleDeleteClick(c.id)}>Delete</button>
+                                }
                             </tr>
                         )
                     }

@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import '../index.css';
 import { useSelector } from 'react-redux'
-import { Alert } from '@material-ui/lab';
+import { Alert } from '@material-ui/lab'
 
 const Notification = () => {
 

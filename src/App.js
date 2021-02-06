@@ -51,26 +51,26 @@ const App = () => {
 
   if (!currentUser) {
     return (
-      <div>
+      <>
         <Container>
-
-          <h1>Delivery service</h1>
+          <h2>Delivery service</h2>
           <Notification />
           <Menu />
         </Container>
-
-      </div>
+      </>
     )
   }
-  //---------------RENDER-WHEN-USER-IS-LOGGED-IN----------------
+
+  // APP.js renders to screen when user is logged in
+
   else {
     return (
       <Container>
         <h1>Delivery service</h1>
         <Notification />
 
-        <p>Welcome {currentUser.name}
-          <Button style={{ width: "150px", height: "30px", marginLeft: "300px" }}
+        <p>Logged in as {currentUser.name}
+          <Button style={{ width: "150px", height: "30px", marginLeft: "100px" }}
             onClick={handleLogOut} >
             LOGOUT
           </Button></p>

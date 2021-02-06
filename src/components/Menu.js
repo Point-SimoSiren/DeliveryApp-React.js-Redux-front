@@ -15,26 +15,26 @@ import {
 import { AppBar, Toolbar, Button } from '@material-ui/core'
 import SignupForm from './SignupForm'
 import LoginForm from './LoginForm'
-import useMediaQuery from '@material-ui/core/useMediaQuery';
+import useMediaQuery from '@material-ui/core/useMediaQuery'
 
 const StyledAppBar = styled(AppBar)`
     && {
         background-color: #124a09;
     }
-`;
+`
 
 const StyledToolBar = styled(Toolbar)`
     && {
         justify-content: flex-left;
     }
-`;
+`
 
 const Menu = () => {
 
-    const smallDevice = useMediaQuery('(max-width:500px)');
-    const midDevice = useMediaQuery('(max-width:900px)');
+    const smallDevice = useMediaQuery('(max-width:500px)')
+    const midDevice = useMediaQuery('(max-width:900px)')
 
-    let LStyle;
+    let LStyle
     let loginStyle
     let signupStyle
 

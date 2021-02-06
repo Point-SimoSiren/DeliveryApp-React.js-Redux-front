@@ -11,7 +11,7 @@ const currentUserReducer = (state = null, action) => {
     }
 }
 
-//------------------ACTION-CREATOR-------------------
+//------------------ACTION-CREATORS-------------------
 
 export const setCurrentUserAction = currentUser => {
     return async dispatch => {
@@ -29,6 +29,5 @@ export const logoutAction = () => {
         })
     }
 }
-
 
 export default currentUserReducer

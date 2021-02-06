@@ -17,6 +17,12 @@ const Items = () => {
         return items
     })
 
+    const currentUser = useSelector(({ currentUser }) => {
+        return currentUser
+    })
+
+
+
     const handleDeleteClick = id => {
         const itemToRemove = items.find(i => i.id === id)
 
@@ -69,8 +75,10 @@ const Items = () => {
                                     <td>{i.price}</td>
                                     <td>{i.manufacturer}</td>
                                     <td>{i.description}</td>
-                                    <button style={{ height: '30px', width: '70px' }}
-                                        onClick={() => handleDeleteClick(i.id)}>Delete</button>
+                                    {currentUser && currentUser.admin === true &&
+                                        <button style={{ height: '30px', width: '70px' }}
+                                            onClick={() => handleDeleteClick(i.id)}>Delete</button>
+                                    }
                                 </tr>
                             )
                         }
@@ -79,6 +87,5 @@ const Items = () => {
             </>
         )
     }
-
 }
 export default Items
